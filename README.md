@@ -4,7 +4,7 @@
 
 This project implements a Physics-Informed Neural Network (PINN) designed to predict the 1D steady compressible pressure distribution through a converging-diverging nozzle.
 
-The challenge in supersonic nozzle flow is the presence of **normal shocks** — abrupt, discontinuous jumps in pressure that occur when the flow transitions from supersonic back to subsonic. Standard Neural Networks struggle to represent these discontinuities and tend to smooth them out. This PINN uses a specialized **Shock-Aware Dual-Branch Architecture** combined with physics-inspired regularization to accurately locate and model these shockwaves, ensuring physical plausibility and high fidelity to the experimental data.
+The challenge in supersonic nozzle flow is the presence of **normal shocks**: abrupt, discontinuous jumps in pressure that occur when the flow transitions from supersonic back to subsonic. Standard Neural Networks struggle to represent these discontinuities and tend to smooth them out. This PINN uses a specialized **Shock-Aware Dual-Branch Architecture** combined with physics-inspired regularization to accurately locate and model these shockwaves, ensuring physical plausibility.
 
 ---
 
@@ -13,7 +13,7 @@ The challenge in supersonic nozzle flow is the presence of **normal shocks** —
 The model (`ShockAwarePINN`) employs a hybrid data-driven and shock-aware approach:
 
 ### Inputs and Outputs
-* **Inputs (3):** Axial distance `x`, Nozzle Area `A(x)`, and Normalized Back Pressure `P_back`.
+* **Inputs (3):** Axial distance `x` (normalised wrt overall length), Nozzle Area `A(x)` (normalised wrt throat area, basically A/A*), and Normalized Back Pressure `P_back`.
 * **Output (1):** Normalized static pressure `P / P_0`.
 
 ### Network Structure
@@ -35,8 +35,6 @@ Because the experimental dataset is relatively coarse (only 8 spatial measuremen
 ---
 
 ## 3. Code Structure
-
-The repository has been refactored for complete modularity, cleanly separating data processing, model logic, training, and visualization.
 
 * `main.py`: The unified Command-Line Interface (CLI) entry point.
 * `data.py`: Handles data loading from CSV, group averaging, cubic spline (PCHIP) spatial augmentation (increasing 8 data points to 50 for spatial density), and dataset normalization.
